@@ -1,4 +1,11 @@
-import { Column, Table, Model, DataType, HasMany } from 'sequelize-typescript';
+import {
+  Column,
+  Table,
+  Model,
+  DataType,
+  HasMany,
+  Scopes,
+} from 'sequelize-typescript';
 import { UserRole } from 'src/constants/enums';
 import { Job } from '../job/job.entity';
 import { PersonalProject } from '../personalProject/personalProject.entity';
@@ -8,6 +15,13 @@ import { Conversation } from '../conversation/conversation.entity';
 import { Message } from '../message/message.entity';
 
 @Table
+@Scopes(() => ({
+  withoutTimeStamps: {
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  },
+}))
 export class User extends Model {
   @Column({ allowNull: false, autoIncrement: true, primaryKey: true })
   id: number;
