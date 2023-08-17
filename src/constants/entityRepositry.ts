@@ -1,0 +1,12 @@
+export const adminRepositry = 'ADMIN_REPOSITORY';
+export const categoryRepositry = 'CATEGORY_REPOSITORY';
+export const userRepositry = 'USER_REPOSITORY';
+export const jobRepositry = 'JOB_REPOSITORY';
+export const jobPriceRepositry = 'JOB_PRICE_REPOSITORY';
+export const personalProjectRepositry = 'PESONAL_PROJECT_REPOSITORY';
+export const photeRepositry = 'PHOTO_REPOSITORY';
+export const jobImplementRepositry = 'JOB_IMPLEMENT_REPOSITORY';
+export const feedbackRepositry = 'FEEDBACK_REPOSITORY';
+export const notificationRepositry = 'NOTIFICATION_REPOSITORY';
+export const conversationRepositry = 'CONVERSATION_REPOSITORY';
+export const messageRepositry = 'MESSAGE_REPOSITORY';
