@@ -49,6 +49,9 @@ export class User extends Model {
   @Column({ type: DataType.STRING, allowNull: false, defaultValue: '' })
   biography: string;
 
+  @Column({ type: DataType.STRING, allowNull: false, defaultValue: '' })
+  job: string;
+
   @Column({
     type: DataType.ENUM(UserRole.BUYER, UserRole.SELLER),
     defaultValue: UserRole.BUYER,

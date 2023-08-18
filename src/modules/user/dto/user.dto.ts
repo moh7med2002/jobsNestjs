@@ -19,6 +19,9 @@ export class UserSignupDto {
   @IsNotEmpty({ message: 'Country cant be empty' })
   country: string;
 
+  @IsNotEmpty({ message: 'Job cant be empty' })
+  job: string;
+
   @IsEnum(UserRole, { message: 'not valid user role' })
   role: UserRole;
 }

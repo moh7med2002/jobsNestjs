@@ -38,7 +38,7 @@ export const databaseProviders = [
         Conversation,
         Message,
       ]);
-      await sequelize.sync({ alter: false });
+      await sequelize.sync({ alter: true });
       return sequelize;
     },
   },

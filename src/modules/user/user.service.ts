@@ -32,6 +32,7 @@ export class UserService {
       country: dto.country,
       image,
       password: hashPs,
+      job: dto.job,
     });
     return { msg: 'Your account been created' };
   }
