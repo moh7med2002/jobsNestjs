@@ -35,3 +35,14 @@ export class UserLoginDto {
   @IsNotEmpty()
   password: string;
 }
+
+export class UserUpdateDto {
+  @IsNotEmpty({ message: 'Name cant be empty' })
+  name: string;
+
+  @IsNotEmpty({ message: 'Biograpgy cant be empty' })
+  biography: string;
+
+  @IsNotEmpty({ message: 'Job cant be empty' })
+  job: string;
+}

@@ -6,11 +6,19 @@ import {
   ForeignKey,
   BelongsTo,
   HasMany,
+  Scopes,
 } from 'sequelize-typescript';
 import { User } from '../user/user.entity';
 import { Photo } from '../photo/photo.entity';
 
 @Table
+@Scopes(() => ({
+  withoutTimeStamps: {
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  },
+}))
 export class PersonalProject extends Model {
   @Column({ allowNull: false, autoIncrement: true, primaryKey: true })
   id: number;

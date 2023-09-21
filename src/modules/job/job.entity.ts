@@ -7,13 +7,13 @@ import {
   BelongsTo,
   HasOne,
   HasMany,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { JobLevel, JobStatus } from 'src/constants/enums';
 import { Category } from '../category/category.entity';
 import { User } from '../user/user.entity';
 import { Price } from '../price/price.entity';
-import { JobImplement } from '../jobImplement/jobImplement.entity';
-import { Conversation } from '../conversation/conversation.entity';
+import { Proposal } from '../proposal/proposal.entity';
 
 @Table
 export class Job extends Model {
@@ -54,17 +54,14 @@ export class Job extends Model {
 
   @ForeignKey(() => User)
   @Column({})
-  userId: number;
+  creatorId: number;
 
-  @BelongsTo(() => User)
-  user: User;
+  @BelongsTo(() => User, 'creatorId')
+  creatorUser: User;
 
   @HasOne(() => Price)
   price: Price;
 
-  @HasMany(() => JobImplement)
-  implements: JobImplement[];
-
-  @HasMany(() => Conversation)
-  conversations: Conversation[];
+  @HasMany(() => Proposal)
+  proposals: Proposal[];
 }

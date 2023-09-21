@@ -7,14 +7,13 @@ import {
   BelongsTo,
   HasOne,
 } from 'sequelize-typescript';
-import { Category } from '../category/category.entity';
 import { User } from '../user/user.entity';
-import { Price } from '../price/price.entity';
 import { Job } from '../job/job.entity';
 import { Feedback } from '../feedback/feedback.entity';
+import { ProposalStatus } from 'src/constants/enums';
 
 @Table
-export class JobImplement extends Model {
+export class Proposal extends Model {
   @Column({ allowNull: false, autoIncrement: true, primaryKey: true })
   id: number;
 
@@ -23,6 +22,19 @@ export class JobImplement extends Model {
 
   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
   duration: number;
+
+  @Column({ type: DataType.TEXT, allowNull: false, defaultValue: '' })
+  description: string;
+
+  @Column({
+    type: DataType.ENUM(
+      ProposalStatus.ACCEPT,
+      ProposalStatus.REJECT,
+      ProposalStatus.PENDING,
+    ),
+    defaultValue: ProposalStatus.PENDING,
+  })
+  status: ProposalStatus;
 
   @ForeignKey(() => Job)
   @Column({})

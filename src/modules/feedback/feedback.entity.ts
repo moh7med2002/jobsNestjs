@@ -6,7 +6,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { JobImplement } from '../jobImplement/jobImplement.entity';
+import { Proposal } from '../proposal/proposal.entity';
 
 @Table
 export class Feedback extends Model {
@@ -19,10 +19,10 @@ export class Feedback extends Model {
   @Column({ type: DataType.TEXT, allowNull: false, defaultValue: '' })
   comment: string;
 
-  @ForeignKey(() => JobImplement)
+  @ForeignKey(() => Proposal)
   @Column({})
-  job_implementId: number;
+  proposalId: number;
 
-  @BelongsTo(() => JobImplement)
-  job_implement: JobImplement;
+  @BelongsTo(() => Proposal)
+  proposal: Proposal;
 }

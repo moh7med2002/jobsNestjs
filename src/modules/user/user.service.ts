@@ -7,7 +7,9 @@ import { userRepositry } from 'src/constants/entityRepositry';
 import { generateToken } from 'src/common/util/generateToken';
 import { VerifyPassword, hashPassword } from 'src/common/util/passwordUtil';
 import { User } from './user.entity';
-import { UserLoginDto, UserSignupDto } from './dto';
+import { UserLoginDto, UserSignupDto, UserUpdateDto } from './dto';
+import { Op } from 'sequelize';
+import { Proposal } from '../proposal/proposal.entity';
 
 @Injectable()
 export class UserService {
@@ -25,7 +27,7 @@ export class UserService {
     }
     const hashPs = await hashPassword(dto.password);
     await this.userRepositry.create({
-      name: dto.biography,
+      name: dto.name,
       biography: dto.biography,
       email: dto.email,
       role: dto.role,
@@ -51,9 +53,54 @@ export class UserService {
       throw new ForbiddenException('Invalid password');
     }
     delete isUserFound.password;
-    const payload = { userId: isUserFound.id, role: 'user' };
+    const payload = { userId: isUserFound.id, role: isUserFound.role };
     const access_token = generateToken(payload);
     const { password, ...others } = isUserFound.toJSON();
     return { msg: 'Login success', user: others, token: access_token };
+  }
+
+  async updateProfile(dto: UserUpdateDto, image: string, userId: number) {
+    const user = await this.userById(userId.toString());
+    user.name = dto.name;
+    user.job = dto.job;
+    user.biography = dto.biography;
+    if (image) {
+      user.image = image;
+    }
+    await user.save();
+    return { message: 'update profile success' };
+  }
+
+  async allUsers(page: string, searchName: string) {
+    const currentPage = parseInt(page) || 1;
+    const perPage = 10;
+    const offset = (currentPage - 1) * perPage;
+
+    let whereCondition = {};
+    if (searchName) {
+      whereCondition = { name: { [Op.like]: `%${searchName}%` } };
+    }
+
+    const { count, rows } = await this.userRepositry
+      .scope('importantFiled')
+      .findAndCountAll({
+        where: { ...whereCondition, role: { [Op.ne]: 'seller' } },
+        order: [['createdAt', 'DESC']],
+        offset: offset,
+        limit: perPage,
+      });
+    const totalPages = Math.ceil(count / perPage);
+    const hasMore = currentPage < totalPages;
+    return { users: rows, count, totalPages, hasMore };
+  }
+
+  async userById(userId) {
+    const user = await this.userRepositry
+      .scope('importantFiled')
+      .findByPk(userId);
+    if (!user) {
+      throw new BadRequestException('user nor found');
+    }
+    return user;
   }
 }

@@ -42,4 +42,19 @@ export class CategoryService {
     await categoryById.save();
     return { msg: 'update category successfully' };
   }
+
+  async fetchAll() {
+    const categories = await this.categoryRepositry.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
+    return { categories };
+  }
+
+  async categoryById(id) {
+    const category = await this.categoryRepositry.findByPk(id);
+    if (!category) {
+      throw new BadRequestException('invalid category id');
+    }
+    return category;
+  }
 }

@@ -10,3 +10,4 @@ export const feedbackRepositry = 'FEEDBACK_REPOSITORY';
 export const notificationRepositry = 'NOTIFICATION_REPOSITORY';
 export const conversationRepositry = 'CONVERSATION_REPOSITORY';
 export const messageRepositry = 'MESSAGE_REPOSITORY';
+export const proposalRepositry = 'PROPOSAL_REPOSITORY';

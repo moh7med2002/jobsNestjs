@@ -10,5 +10,6 @@ import { Price } from './price.entity';
       useValue: Price,
     },
   ],
+  exports: [jobPriceRepositry],
 })
 export class PriceModule {}

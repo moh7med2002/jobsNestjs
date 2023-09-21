@@ -13,5 +13,6 @@ import { CategoryService } from './category.service';
     },
     CategoryService,
   ],
+  exports: [CategoryService],
 })
 export class CategoryModule {}

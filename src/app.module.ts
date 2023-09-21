@@ -14,9 +14,7 @@ import { PersonalProjectModule } from './modules/personalProject/personalProject
 import { PhotoModule } from './modules/photo/photo.module';
 import { FeedbackModule } from './modules/feedback/feedback.module';
 import { NotificationModule } from './modules/notification/notification.module';
-import { JobImplementModule } from './modules/jobImplement/jobImplement.module';
-import { ConversationModule } from './modules/conversation/conversation.module';
-import { MessageModule } from './modules/message/message.module';
+import { ProposalModule } from './modules/proposal/proposal.module';
 
 @Module({
   imports: [
@@ -37,9 +35,7 @@ import { MessageModule } from './modules/message/message.module';
     PhotoModule,
     FeedbackModule,
     NotificationModule,
-    JobImplementModule,
-    ConversationModule,
-    MessageModule,
+    ProposalModule,
   ],
   controllers: [AppController],
 })

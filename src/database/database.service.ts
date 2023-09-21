@@ -1,15 +1,13 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Admin } from 'src/modules/admin/admin.entity';
 import { Category } from 'src/modules/category/category.entity';
-import { Conversation } from 'src/modules/conversation/conversation.entity';
 import { Feedback } from 'src/modules/feedback/feedback.entity';
 import { Job } from 'src/modules/job/job.entity';
-import { JobImplement } from 'src/modules/jobImplement/jobImplement.entity';
-import { Message } from 'src/modules/message/message.entity';
 import { Notification } from 'src/modules/notification/notification.entity';
 import { PersonalProject } from 'src/modules/personalProject/personalProject.entity';
 import { Photo } from 'src/modules/photo/photo.entity';
 import { Price } from 'src/modules/price/price.entity';
+import { Proposal } from 'src/modules/proposal/proposal.entity';
 import { User } from 'src/modules/user/user.entity';
 
 export const databaseProviders = [
@@ -32,13 +30,11 @@ export const databaseProviders = [
         Price,
         PersonalProject,
         Photo,
-        JobImplement,
         Feedback,
         Notification,
-        Conversation,
-        Message,
+        Proposal,
       ]);
-      await sequelize.sync({ alter: true });
+      await sequelize.sync({ alter: false });
       return sequelize;
     },
   },

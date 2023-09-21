@@ -8,6 +8,6 @@ export const SaveUser = createParamDecorator(
 
     // const user = await UserService.findById(payload.id)
     // return user;
-    return '';
+    return payload;
   },
 );

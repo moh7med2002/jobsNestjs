@@ -5,20 +5,24 @@ import {
   DataType,
   HasMany,
   Scopes,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { UserRole } from 'src/constants/enums';
 import { Job } from '../job/job.entity';
 import { PersonalProject } from '../personalProject/personalProject.entity';
 import { Notification } from '../notification/notification.entity';
-import { JobImplement } from '../jobImplement/jobImplement.entity';
-import { Conversation } from '../conversation/conversation.entity';
-import { Message } from '../message/message.entity';
+import { Proposal } from '../proposal/proposal.entity';
 
 @Table
 @Scopes(() => ({
   withoutTimeStamps: {
     attributes: {
       exclude: ['createdAt', 'updatedAt'],
+    },
+  },
+  importantFiled: {
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'password'],
     },
   },
 }))
@@ -61,18 +65,12 @@ export class User extends Model {
   @HasMany(() => Job)
   jobs: Job[];
 
-  @HasMany(() => JobImplement)
-  jobImplements: JobImplement[];
+  @HasMany(() => Proposal)
+  proposals: Proposal[];
 
   @HasMany(() => PersonalProject)
   projects: PersonalProject[];
 
   @HasMany(() => Notification)
   notifications: Notification[];
-
-  @HasMany(() => Conversation)
-  conversations: Conversation[];
-
-  @HasMany(() => Message)
-  messages: Message[];
 }

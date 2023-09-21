@@ -13,3 +13,9 @@ export enum JobLevel {
   IMPLEMENTATION = 'implementation',
   DELIVERED = 'delivered',
 }
+
+export enum ProposalStatus {
+  ACCEPT = 'accepted',
+  REJECT = 'rejected',
+  PENDING = 'pending',
+}
